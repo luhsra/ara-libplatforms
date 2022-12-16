@@ -20,7 +20,8 @@ endforeach
 libstm_hal_target = custom_target('cmsis.ar',
                           input: obj_targets,
                           output: 'libcmsis.a',
-                          command: ar_cmd)
+                          command: ar_cmd,
+                          build_by_default: true)
 
 
 # ld_flags += ['-Wl,-L' + meson.current_build_dir()]

@@ -33,6 +33,7 @@ endforeach
 libstm_hal_target = custom_target('stm_hal.ar',
                           input: obj_targets,
                           output: 'libstm_hal.a',
-                          command: ar_cmd)
+                          command: ar_cmd,
+                          build_by_default: true)
 
 # ld_flags += ['-Wl,-L' + meson.current_build_dir()]
