@@ -21,8 +21,10 @@ foreach src : src_files
                              input: src,
                              output: src+'.o',
                              depfile: src+'.dep',
-                             command: clang_c+
+                             command: clang_c +
+                                      arm_clang_flags +
                                       libs_includes +
+                                      arm_ld_flags +
                                       ld_flags +
                                       obj_flags +
                                       clang_flags)

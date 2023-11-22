@@ -11,8 +11,10 @@ foreach src : src_files
                              input: src+'.cc',
                              output: src+'.cc.o',
                              depfile: src+'.cc.dep',
-                             command: clang_cpp+
+                             command: clang_cpp +
+                                      arm_clang_flags +
                                       libs_includes +
+                                      arm_ld_flags +
                                       ld_flags +
                                       obj_flags +
                                       clang_flags)
