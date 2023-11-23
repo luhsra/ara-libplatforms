@@ -112,6 +112,7 @@ if arm_enabled
   # declare_dependency does not make sense here, see https://github.com/mesonbuild/meson/issues/12543
   libplatform_link_with = libplatform_target
   libplatform_include_directories = libs_includes
+  libplatform_linkerscript = default_linkerscript
 endif
 
 
