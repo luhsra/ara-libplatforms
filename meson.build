@@ -3,12 +3,6 @@ project('libplatforms', 'cpp',
                        'cpp_std=c++17',
                        'buildtype=debugoptimized'])
 
-fs = import('fs')
-
-# Python
-py3_mod = import('python')
-py3_inst = py3_mod.find_installation('python3', modules: [])
-
 ## llvm dependencies
 llvm_version = ['>=14', '<16']
 llvm_dep = dependency('llvm', method: 'config-tool', version: llvm_version, include_type: 'system')
