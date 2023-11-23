@@ -2,6 +2,10 @@
 src_files = ['system_stm32f1xx.c']
 
 obj_targets = []
+includes = []
+foreach include : libs_includes
+  includes += ['-I', include]
+endforeach
 foreach src : src_files
   lib_platform_src_files += files(src)
   obj_target = custom_target(src,
@@ -10,7 +14,7 @@ foreach src : src_files
                              depfile: src+'.dep',
                              command: clang_c+
                                       arm_clang_flags +
-                                      libs_includes +
+                                      includes +
                                       arm_ld_flags +
                                       ld_flags +
                                       obj_flags +

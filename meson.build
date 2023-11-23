@@ -16,9 +16,9 @@ llvm_dep = dependency('llvm', method: 'config-tool', version: llvm_version, incl
 toolchains = subproject('toolchains')
 arm_enabled = toolchains.get_variable('arm_enabled')
 
-# this variables are filled in the subdirs
+# this variable is filled in the subdirs
+# in contains all paths that needs to be included
 libs_includes = []
-libs_include_dirs = []
 
 # common flags for clang
 clang_flags = ['-g',  # generate debug information
@@ -115,10 +115,9 @@ if arm_enabled
   subdir('platform')
   subdir('include')
 
-  libplatforms_dep = declare_dependency(
-    link_with : libplatform_target,
-    include_directories : libs_include_dirs
-  )
+  # declare_dependency does not make sense here, see https://github.com/mesonbuild/meson/issues/12543
+  libplatform_link_with = libplatform_target
+  libplatform_include_directories = libs_includes
 endif
 
 
