@@ -36,7 +36,7 @@ llc_flags = ['--function-sections',
             ]
 ld_flags = ['-Wl,--gc-sections',
             '-Wl,--warn-common',
-            '-Wl,--warn-section-align',
+            # '-Wl,--warn-section-align',
             '-Wl,--cref',
             '-Wl,-Map,@OUTPUT0@.map'
            ]
@@ -87,7 +87,7 @@ if arm_enabled
   lld = toolchains.get_variable('llvm_ld')
   arm_include_path = toolchains.get_variable('arm_include_path')
   arm_link_path = toolchains.get_variable('arm_link_path')
-  libgcc_dir = toolchains.get_variable('libgcc_dir')
+  arm_libgcc_dir = toolchains.get_variable('arm_libgcc_dir')
 
   arm_ld_flags = [
     '-Wl,-Map,@OUTPUT0@.map',
@@ -98,10 +98,8 @@ if arm_enabled
     '-lc',
     f'-I@arm_include_path@',
     f'-Wl,-L,@arm_link_path@' / arm_mode,
-    f'-Wl,-L,@libgcc_dir@' / arm_mode,
+    f'-Wl,-L,@arm_libgcc_dir@' / arm_mode,
   ]
-
-  # llc_flags += ['--frame-pointer=none']
 
   arm_ar = toolchains.get_variable('arm_ar')
   ar_cmd = [arm_ar, ar_args]
