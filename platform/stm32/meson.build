@@ -28,6 +28,6 @@ endforeach
 
 
 
-default_linkerscript = files('linkerscript.ld')
+default_linkerscript = files('linkerscript.ld')[0]
 
 run_target('cat_serial', command:[join_paths(meson.current_source_dir(), 'cat_serial.sh')])
