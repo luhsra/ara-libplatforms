@@ -113,6 +113,12 @@ if arm_enabled
   libplatform_link_with = libplatform_target
   libplatform_include_directories = libs_includes
   libplatform_linkerscript = default_linkerscript
+
+  summary({
+    'Link library (libplatform_link_with)': libplatform_link_with.full_path(),
+    'Includes (libplatform_include_directories)': libplatform_include_directories,
+    'Linkerscript (libplatform_linkerscript)': '@0@'.format(libplatform_linkerscript), # replace this with "full_path()" in Meson 1.4.0
+  })
 endif
 
 
