@@ -1,4 +1,29 @@
 lib_platform_targets = []
+
+stm32_clang_flags = [
+    '-fno-builtin',
+    '-fno-threadsafe-statics',
+    '-fshort-enums',
+    '--rtlib=libgcc',
+    '-fomit-frame-pointer',
+    '-mcpu=cortex-m3',
+    '-march=armv7-m',
+    '-mabi=aapcs',
+    '-mfloat-abi=soft',
+    '-DF_CPU=72000000L',
+    '-DMCU_STM32F103RB',
+    '-DSTM32F1',
+    '-DSTM32F103RB',
+    '-DSTM32F103xB',
+]
+
+stm32_arm_mode = 'thumb' / 'v7-m' / 'nofp'
+
+stm32_ld_flags = [
+    f'-Wl,-L,@arm_link_path@' / stm32_arm_mode,
+    f'-Wl,-L,@arm_libgcc_dir@' / stm32_arm_mode
+]
+
 subdir('Drivers/CMSIS/')
 subdir('Drivers/STM32F1xx_HAL_Driver/')
 
@@ -17,8 +42,10 @@ foreach src : src_files
                              depfile: src+'.cc.dep',
                              command: clang_cpp +
                                       arm_clang_flags +
+                                      stm32_clang_flags +
                                       includes +
                                       arm_ld_flags +
+                                      stm32_ld_flags +
                                       ld_flags +
                                       obj_flags +
                                       clang_flags)

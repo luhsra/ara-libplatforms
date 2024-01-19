@@ -28,6 +28,7 @@ foreach src : src_files
                              command: clang_c +
                                       arm_clang_flags +
                                       includes +
+                                      stm32_clang_flags +
                                       arm_ld_flags +
                                       ld_flags +
                                       obj_flags +

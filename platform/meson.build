@@ -1,6 +1,8 @@
 lib_platform_src_files = []
 libplatform_includes = []
 
+
+subdir('raspberry')
 subdir('stm32')
 libplatform_target = custom_target('libplatform.a',
                                    input: lib_platform_targets,
