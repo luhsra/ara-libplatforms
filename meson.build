@@ -10,6 +10,8 @@ llvm_dep = dependency('llvm', method: 'config-tool', version: llvm_version, incl
 toolchains = subproject('toolchains')
 arm_enabled = toolchains.get_variable('arm_enabled')
 
+llc = toolchains.get_variable('llc')
+
 # this variable is filled in the subdirs
 # in contains all paths that needs to be included
 libs_includes = []
@@ -34,6 +36,9 @@ llvm_opt_flags = [
 llc_flags = ['--function-sections',
              '--data-sections',
             ]
+llc_cmd = [llc, '-filetype=obj', '-o', '@OUTPUT@', '@INPUT@', ] + llc_flags
+
+
 ld_flags = ['-Wl,--gc-sections',
             '-Wl,--warn-common',
             # '-Wl,--warn-section-align',
