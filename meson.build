@@ -74,7 +74,7 @@ if arm_enabled
     '-mthumb',
   ]
 
-  #lld = toolchains.get_variable('llvm_ld')
+  lld = toolchains.get_variable('llvm_ld')
   arm_include_path = toolchains.get_variable('arm_include_path')
   arm_link_path = toolchains.get_variable('arm_link_path')
   arm_libgcc_dir = toolchains.get_variable('arm_libgcc_dir')
@@ -82,11 +82,9 @@ if arm_enabled
   arm_ld_flags = [
     '-Wl,-Map,@OUTPUT0@.map',
     '-Wl,--cref',
-    #'-fuse-ld=' + lld.full_path(),
+    '-fuse-ld=' + lld.full_path(),
     '-nostdlib',
     '-nodefaultlibs',
-    '-lc',
-    f'-I@arm_include_path@'
   ]
 
   arm_ar = toolchains.get_variable('arm_ar')
