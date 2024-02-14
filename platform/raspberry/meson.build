@@ -2,8 +2,7 @@ lib_platform_targets = []
 
 
 pi4_clang_flags = [
-    # actually pi4 is cortex-a72, but this makes it compatible with qemu
-    '-mcpu=cortex-a7',
+    '-mcpu=cortex-a72',
     '-mthumb',
     '-mfloat-abi=soft',
     '-std=c++11',
