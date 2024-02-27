@@ -17,15 +17,10 @@ llc = toolchains.get_variable('llc')
 libs_includes = []
 
 # common flags for clang
-clang_flags = ['-g',  # generate debug information
-               '-O0',
-               '-Xclang', '-disable-O0-optnone',  # don't set the noopt attribute (prevent optimization needed by ARA)
-               '-ffunction-sections',
-               '-fdata-sections',
-               '-fno-rtti',
-               '-Wno-everything',
-               '-fno-discard-value-names',  # use the C/C++ variable names for the pendent in the LLVM IR when possible
-               '-fno-exceptions']
+clang_flags = [
+  '-ffunction-sections',
+  '-fdata-sections',
+] + toolchains.get_variable('clang_flags')
 
 llvm_opt_flags = [
   # '-time-passes',
@@ -46,23 +41,14 @@ ld_flags = ['-Wl,--gc-sections',
             '-Wl,-Map,@OUTPUT0@.map'
            ]
 
-# compiler flags to generate IR
-ir_flags = ['-S', '-emit-llvm',]
+ir_flags = toolchains.get_variable('ir_flags')
 
 obj_flags = ['-c']
 
 # standard invocations for clang with c and cpp
-c_std = '-std=c11'
-cxx_std = '-std=c++11'
 
-clang = toolchains.get_variable('clang')
-clang_base = [
-           '-o', '@OUTPUT0@',
-           '@INPUT@',
-           '-MD', '-MF', '@DEPFILE@',
-]
-clang_c = [clang, clang_base, c_std]
-clang_cpp = [clang, clang_base, cxx_std]
+clang_c = toolchains.get_variable('clang_c_cmd')
+clang_cpp = toolchains.get_variable('clang_cpp_cmd')
 
 ar_args = ['qcs', '@OUTPUT@', '@INPUT@']
 
