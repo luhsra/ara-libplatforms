@@ -43,5 +43,7 @@ On the host
     enable-tftp
     tftp-root=/srv/tftp
     ```
+* Managed DNS Server needs to send the following string as Option 43 (length 32)
+`\x06\x01\x03\x0a\x04\x00PXE\t\x14\x00\x00\x11Raspberry Pi Boot\xff`
 
-With Ethernet+UART connected, but SD card removed, the Pi should do a PXE boot.
+With Ethernet+UART connected, but SD card removed, the Pi should do a PXE boot now.
