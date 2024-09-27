@@ -31,6 +31,7 @@ llvm_opt_flags = [
 llc_flags = ['--function-sections',
              '--data-sections',
             ]
+
 llc_cmd = [llc, '-filetype=obj', '-o', '@OUTPUT@', '@INPUT@', ] + llc_flags
 
 
@@ -72,6 +73,7 @@ if arm_enabled
     '-nostdlib',
     '-nodefaultlibs',
   ]
+  arm_llc_flags = ['--frame-pointer=none']
 
   arm_ar = toolchains.get_variable('arm_ar')
   ar_cmd = [arm_ar, ar_args]
