@@ -20,7 +20,10 @@ stm32_clang_flags = [
 stm32_arm_mode = 'thumb' / 'v7-m' / 'nofp'
 
 stm32_ld_flags = [
-    '-lc',
+    '-lc_nano',
+    '-lm',
+    '-lgcc',  # for floating point stuff
+    '-lnosys',
     f'-I@arm_include_path@',
     f'-Wl,-L,@arm_link_path@' / stm32_arm_mode,
     f'-Wl,-L,@arm_libgcc_dir@' / stm32_arm_mode
