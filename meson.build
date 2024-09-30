@@ -93,4 +93,6 @@ if arm_enabled
   })
 endif
 
+tftp_host = get_option('tftp_host')
+
 

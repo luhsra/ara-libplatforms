@@ -1,0 +1,1 @@
+option('tftp_host', type: 'string', value: 'lab-pc00', description: 'TFTP host for Raspberry Pi tests')
