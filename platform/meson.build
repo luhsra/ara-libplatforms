@@ -3,6 +3,7 @@ libplatform_includes = []
 
 
 subdir('raspberry')
+subdir('beaglev')
 subdir('stm32')
 libplatform_target = custom_target('libplatform.a',
                                    input: lib_platform_targets,

@@ -1,1 +1,1 @@
-option('tftp_host', type: 'string', value: 'lab-pc00', description: 'TFTP host for Raspberry Pi tests')
+option('tftp_host', type: 'string', value: 'lab-pc00', description: 'TFTP host for remote target tests')
