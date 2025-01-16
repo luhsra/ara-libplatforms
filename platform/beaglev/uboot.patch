@@ -17,7 +17,7 @@ index be67a598..479c953b 100644
  
 +#ifdef CONFIG_SMP
 +	printf ("## Starting all cores at 0x%08lX ...\n", addr);
-+	int ret = smp_call_function(addr, 0, 0, 0);
++	int ret = smp_call_function(addr, 0, 0, 1);
 +	if (ret)
 +		printf ("## Starting other cores failed\n");
 +#endif
