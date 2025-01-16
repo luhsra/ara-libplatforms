@@ -1,0 +1,27 @@
+diff --git a/cmd/boot.c b/cmd/boot.c
+index be67a598..479c953b 100644
+--- a/cmd/boot.c
++++ b/cmd/boot.c
+@@ -11,6 +11,8 @@
+ #include <command.h>
+ #include <net.h>
+ 
++#include <asm/smp.h>
++
+ #ifdef CONFIG_CMD_GO
+ 
+ /* Allow ports to override the default behavior */
+@@ -33,6 +35,13 @@ static int do_go(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 	printf ("## Starting application at 0x%08lX ...\n", addr);
+ 
++#ifdef CONFIG_SMP
++	printf ("## Starting all cores at 0x%08lX ...\n", addr);
++	int ret = smp_call_function(addr, 0, 0, 0);
++	if (ret)
++		printf ("## Starting other cores failed\n");
++#endif
++
+ 	/*
+ 	 * pass address parameter as argv[0] (aka command name),
+ 	 * and all remaining args

@@ -12,15 +12,29 @@ Use this to test the device functionality.
 
 ## Patch U-Boot
 
+### Configuration
+
 use the provided uboot.defconfig or menuconfig to configure `BeagleV-Fire-ubuntu/uboot` with following config.
 ```
-CONFIG_RISCV_SMODE=y
+# U-Boot in machine mode:
+CONFIG_RISCV_MMODE=y
+
+# load image from TFTP server
 CONFIG_BOOTCOMMAND="dhcp; setenv bootfile research/beaglev/autosar.bin; setenv loadaddr 0x80000000; tftp; go 0x80000000"
+
+# for static IPs (faster)
+CONFIG_BOOTCOMMAND="setenv ipaddr 10.33.23.213; setenv serverip 10.33.23.253; setenv bootfile research/beaglev/autosar.bin; setenv loadaddr 0x80000000; tftp; go 0x80000000"
 ```
+
+### Multicore startup
+
+* there are two options
+  * the bootm command can be used, but images must be formatted accordingly
+  * the go command (as used in the new BOOTCOMMAND) must be extended for multicore, apply the [patch file](uboot.patch)
 
 ## Configure HSS
 
-By default, the HSS will switch to S-Mode when loading U-Boot. To change this behavior:
+By default, the HSS will switch to S-Mode when loading U-Boot and enable OpenSBI interface. To change this behavior:
 copy `hss_config.yaml` to `BeagleV-Fire-ubuntu/deploy/config.yaml`.
 
 ## TFTP Boot
