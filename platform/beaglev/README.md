@@ -14,7 +14,7 @@ Use this to test the device functionality.
 
 use the provided uboot.defconfig or menuconfig to configure `BeagleV-Fire-ubuntu/uboot` with following config.
 ```
-CONFIG_RISCV_SMODE=y
+CONFIG_RISCV_MMODE=y
 CONFIG_BOOTCOMMAND="dhcp; setenv bootfile research/beaglev/autosar.bin; setenv loadaddr 0x80000000; tftp; go 0x80000000"
 ```
 
