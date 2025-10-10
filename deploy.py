@@ -34,7 +34,7 @@ def main():
 
     run([args.ssh, args.ssh_host, remote_cmd])
     if args.rpi:
-        remote_cmd = f"sed -i -E 's/^kernel=.*/kernel={name}.img/' {args.path}/config.txt"
+        remote_cmd = f"sed -i -E 's/^kernel=.*/kernel=autosar\/{name}.img/' {args.path}/config.txt"
         run([args.ssh, args.ssh_host, remote_cmd])
     if args.beaglev:
         remote_cmd = f"cp {args.path}/{name}.img {args.path}/autosar.bin"
