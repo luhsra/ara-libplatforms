@@ -34,8 +34,26 @@ def main():
 
     run([args.ssh, args.ssh_host, remote_cmd])
     if args.rpi:
+        # TODO: this only works for 32-bit Autosar
         remote_cmd = f"sed -i -E 's/^kernel=.*/kernel=autosar\/{name}.img/' {args.path}/config.txt"
         run([args.ssh, args.ssh_host, remote_cmd])
+
+        # TODO: to enable both variants simultaneous need something like:
+        """
+        if args.is_32:
+            remote_cmd = f"sed -i -E 's/^kernel=.*/kernel=autosar\/{name}.img/' {args.path}/config32.txt"
+            run([args.ssh, args.ssh_host, remote_cmd])
+            # force symlink to be on 32-bit config
+            remote_cmd = f" cd /proj/tftp/research/rpi4/autosar && ln -s -f config32.txt config.txt"
+            run([args.ssh, args.ssh_host, remote_cmd])
+        else:
+            remote_cmd = f"sed -i -E 's/^kernel=.*/kernel=autosar\/{name}.img/' {args.path}/config64.txt"
+            run([args.ssh, args.ssh_host, remote_cmd])
+            # force symlink to be on 64-bit config
+            remote_cmd = f" cd /proj/tftp/research/rpi4 && ln -s -f config64.txt config.txt"
+            run([args.ssh, args.ssh_host, remote_cmd])
+        
+        """
     if args.beaglev:
         remote_cmd = f"cp {args.path}/{name}.img {args.path}/autosar.bin"
         run([args.ssh, args.ssh_host, remote_cmd])
