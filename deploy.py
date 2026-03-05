@@ -13,6 +13,7 @@ def run(cmd):
 def main():
     parser = argparse.ArgumentParser(description="Deploy image on the remote RPi.")
     parser.add_argument("image", type=Path, help="image file")
+    # this path includes rpi4/autosar
     parser.add_argument("--path", required=True, type=Path, help="remote tftp path")
     parser.add_argument("--ssh-host", required=True, help="ssh host")
     parser.add_argument("--scp", required=True, type=Path, help="path to scp")
@@ -35,7 +36,8 @@ def main():
     run([args.ssh, args.ssh_host, remote_cmd])
     if args.rpi:
         # TODO: this only works for 32-bit Autosar
-        remote_cmd = f"sed -i -E 's/^kernel=.*/kernel=autosar\/{name}.img/' {args.path}/config.txt"
+        # need to edit config.txt in parent fodler
+        remote_cmd = f"sed -i -E 's/^kernel=.*/kernel=autosar\/{name}.img/' {args.path}/../config.txt"
         run([args.ssh, args.ssh_host, remote_cmd])
 
         # TODO: to enable both variants simultaneous need something like:
