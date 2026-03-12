@@ -33,7 +33,10 @@ def main():
 
     remote_cmd = f"chmod 777 {args.path}/{name}.img"
 
-    run([args.ssh, args.ssh_host, remote_cmd])
+    try:
+        run([args.ssh, args.ssh_host, remote_cmd])
+    except subprocess.CalledProcessError:
+        print("Failed to set permissions on remote file.")
     if args.rpi:
         # TODO: this only works for 32-bit Autosar
         # need to edit config.txt in parent fodler
