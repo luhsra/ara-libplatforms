@@ -1,1 +1,1 @@
-option('tftp_host', type: 'string', value: 'lab-pc00', description: 'TFTP host for remote target tests')
+option('tftp_host', type: 'string', value: 'lab-pc00', yield: true, description: 'do not edit, only modify parrots meson_options.txt')

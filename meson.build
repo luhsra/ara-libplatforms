@@ -1,7 +1,8 @@
 project('libplatforms', 'cpp',
     default_options : ['warning_level=3',
                        'cpp_std=c++17',
-                       'buildtype=debugoptimized'])
+                       'buildtype=debugoptimized'],
+    meson_version: '>=1.10.0', version: 'SRA\'26')
 
 ## llvm dependencies
 llvm_version = ['>=14', '<16']
@@ -89,7 +90,7 @@ if arm_enabled
   summary({
     'Link library (libplatform_link_with)': libplatform_link_with.full_path(),
     'Includes (libplatform_include_directories)': libplatform_include_directories,
-    'Linkerscript (libplatform_linkerscript)': '@0@'.format(libplatform_linkerscript), # replace this with "full_path()" in Meson 1.4.0
+    'Linkerscript (libplatform_linkerscript)': '@0@'.format(libplatform_linkerscript.full_path()), # replace this with "full_path()" in Meson 1.4.0
   })
 endif
 
