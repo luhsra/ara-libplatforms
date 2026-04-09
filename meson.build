@@ -79,7 +79,12 @@ if arm_enabled
 
   arm_ar = toolchains.get_variable('arm_ar')
   ar_cmd = [arm_ar, ar_args]
+endif
 
+subdir('platform')
+subdir('include')
+
+if arm_enabled
   # declare_dependency does not make sense here, see https://github.com/mesonbuild/meson/issues/12543
   libplatform_link_with = libplatform_target
   libplatform_include_directories = libs_includes
@@ -91,9 +96,6 @@ if arm_enabled
     'Linkerscript (libplatform_linkerscript)': '@0@'.format(libplatform_linkerscript.full_path()), # replace this with "full_path()" in Meson 1.4.0
   })
 endif
-
-subdir('platform')
-subdir('include')
 
 tftp_host = get_option('tftp_host')
 tftp_deploy = files('deploy.py')
